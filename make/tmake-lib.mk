@@ -1,3 +1,4 @@
+# this file is a part of tmake, get the latest version at https://github.com/stanix-org/tconf
 # makefile include to build a library
 
 LIB ?= $(PACKAGE)
@@ -11,7 +12,7 @@ STATIC_LIB ?= lib$(LIB).a
 SHARED_LIB ?= lib$(LIB).so
 STATIC_OBJS += $(SRCNAMES:%=$(BUILDDIR)/%.o)
 SHARED_OBJS += $(SRCNAMES:%=$(BUILDDIR)/%.so)
-CFLAGS := -std=c99 -I ./ $(CFLAGS)
+CFLAGS := -I ./ $(CFLAGS)
 LIBMODE ?= 0744
 
 all :

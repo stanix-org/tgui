@@ -9,6 +9,7 @@ OPTIONS="STATIC SHARED PLATFORM"
 tconf_init "$@"
 
 tconf_search_cc "$HOST"
+tconf_search_pkgconfig "$HOST"
 tconf_find_os
 
 OS="${HOST#*-}"
@@ -24,8 +25,9 @@ case $PLATFORM in
 		LDFLAGS="$LDFLAGS -ltwm -lgfx"
 		;;
 	x11)
+		tconf_require "$PKGCONF" "pkgconfig"
 		LDFLAGS="$LDFLAGS -lX11 -lXft -lXrender"
-		CFLAGS="$CFLAGS -I\$(PREFIX)/include/freetype2"
+		CFLAGS="$CFLAGS $($PKGCONFIG freetype2 --cflags)"
 		;;
 	*)
 		echo "unknown platform '$PLATFORM'"

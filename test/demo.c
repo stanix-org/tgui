@@ -100,18 +100,18 @@ tgui_widget_t *align_tab() {
 }
 
 static tgui_string_list_t *list;
-static tgui_counter_t *index;
+static tgui_counter_t *list_index;
 
 void insert_element(void) {
-	size_t i = tgui_counter_get_value(index);
+	size_t i = tgui_counter_get_value(list_index);
 	tgui_string_list_insert(list, i, "inserted item");
-	tgui_counter_set_range(index, 0, tgui_list_model_get_count(TGUI_LIST_MODEL_CAST(list)));
+	tgui_counter_set_range(list_index, 0, tgui_list_model_get_count(TGUI_LIST_MODEL_CAST(list)));
 }
 
 void remove_element(void) {
-	size_t i = tgui_counter_get_value(index);
+	size_t i = tgui_counter_get_value(list_index);
 	tgui_string_list_remove(list, i);
-	tgui_counter_set_range(index, 0, tgui_list_model_get_count(TGUI_LIST_MODEL_CAST(list)));
+	tgui_counter_set_range(list_index, 0, tgui_list_model_get_count(TGUI_LIST_MODEL_CAST(list)));
 }
 
 tgui_widget_t *list_tab() {
@@ -126,8 +126,8 @@ tgui_widget_t *list_tab() {
 	tgui_text_view_set_buffer(text_view, text_buffer);
 	add_element(box, TGUI_WIDGET_CAST(text_view));
 
-	index = tgui_counter_new();
-	tgui_box_append_widget(box, TGUI_WIDGET_CAST(index));
+	list_index = tgui_counter_new();
+	tgui_box_append_widget(box, TGUI_WIDGET_CAST(list_index));
 	tgui_button_t *insert = tgui_button_new();
 	tgui_button_set_text(insert, "insert element");
 	tgui_widget_connect_signal(TGUI_WIDGET_CAST(insert), "click", TCALLBACK_CAST(insert_element), NULL);
@@ -146,7 +146,7 @@ tgui_widget_t *list_tab() {
 		NULL,
 	};
 	list = tgui_string_list_new(strings);
-	tgui_counter_set_range(index, 0, tgui_list_model_get_count(TGUI_LIST_MODEL_CAST(list)));
+	tgui_counter_set_range(list_index, 0, tgui_list_model_get_count(TGUI_LIST_MODEL_CAST(list)));
 
 	tgui_scrolled_window_t *scrolled_window = tgui_scrolled_window_new();
 

@@ -1,3 +1,4 @@
+# this file is a part of tmake, get the latest version at https://github.com/stanix-org/tconf
 # makefile include to build a program
 
 PROG ?= $(PACKAGE)
@@ -5,7 +6,7 @@ SRCS ?= $(wildcard *.[cs])
 SRCNAMES = $(notdir $(SRCS))
 SRCDIRS += $(dir $(SRCS))
 OBJS += $(SRCNAMES:%=$(BUILDDIR)/%.o)
-CFLAGS := -std=c99 -I ./ $(CFLAGS)
+CFLAGS := -I ./ $(CFLAGS)
 
 BIN += $(BUILDDIR)/$(PROG)
 BINCLEANFILES += $(BUILDDIR)/$(PROG) $(OBJS)
